@@ -3,24 +3,26 @@ import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 import MenuItem from '../../Shared/MenuItem/MenuItem';
 
 const PopularMenu = () => {
+  
     const [menu,setMenu]= useState([])
-
+    const popular = menu.filter(item => item.category ==='popular')
     useEffect(()=>{
         fetch('menu.json')
         .then(res=> res.json())
         .then(datas=>{
-            setMenu(datas.filter(data=>data.category ==="popular"))
+            setMenu(datas)
             // setMenu(datas)
         })
     },[])
     return (
         <div className='mb-12'>
+    
             <SectionTitle heading="From our menu" subHeading="Popular items"></SectionTitle>
             
             <div className='grid md:grid-cols-2 lg:grid-col-2 gap-6'>
                
                 {
-                    menu.map(item => <MenuItem key={item._id} item={item}></MenuItem>)
+                    popular.map(item => <MenuItem key={item._id} item={item}></MenuItem>)
                 }
             </div>
            <div className='text-center '>
