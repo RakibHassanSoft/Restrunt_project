@@ -1,37 +1,47 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
-
+import { BsCart3 } from "react-icons/bs";
+import useCart from '../../../hooks/useCart';
 const Navbar = () => {
-    const {user,signOutUser} = useContext(AuthContext)
-    //  console.log(user)
-    const navigate = useNavigate()
-    const handleLogOut = ()=>{
-      signOutUser()
-      .then(()=>{
+  const { user, signOutUser } = useContext(AuthContext)
+  //  console.log(user)
+  const navigate = useNavigate()
+  const [cart] = useCart()
+  const handleLogOut = () => {
+    signOutUser()
+      .then(() => {
         navigate('/login')
       })
-      .catch(err=>console.log(err))
-    }
+      .catch(err => console.log(err))
+  }
   const navOptions =
     <>
       <li><Link to='/'>Home</Link></li>
       <li><Link to='/menu'> Our menu</Link></li>
       <li><Link to='/order/salad'> Order</Link></li>
       <li><Link to='/secret'> Secret</Link></li>
-     
-     
+
+
+
       {
         user ? <>
-         <li><Link onClick={handleLogOut} >Logout</Link></li>
+          <li>
+            <Link to='/dashboard/cart' className='    bg-opacity-50 border-0'>
+              <BsCart3 className='text-white' />
+              <div className="badge badge-secondary ml-1">{cart.length}</div>
+
+            </Link>
+          </li>
+          <li><Link onClick={handleLogOut} >Logout</Link></li>
         </>
-        :<>
-         <li><Link to='/login'> Login</Link></li>
-         <li><Link to='/signup'> Signup</Link></li>
-        </>
+          : <>
+            <li><Link to='/login'> Login</Link></li>
+            <li><Link to='/signup'> Signup</Link></li>
+          </>
       }
 
-  
+
     </>
   return (
     <div className="navbar max-w-screen-xl fixed z-10 bg-opacity-30 bg-black text-white">

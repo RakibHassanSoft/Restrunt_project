@@ -9,14 +9,14 @@ import { Helmet } from 'react-helmet-async';
 const Home = () => {
     return (
         <div>
-              <Helmet>
-        <title>Restunt | home</title>
-         </Helmet>
-           <Banner></Banner>
-           <Category></Category>
-           <PopularMenu></PopularMenu>
-           <Featured></Featured>
-           <Testimonials></Testimonials>
+            <Helmet>
+                <title>Restunt | home</title>
+            </Helmet>
+            <Banner></Banner>
+            <Category></Category>
+            <PopularMenu></PopularMenu>
+            <Featured></Featured>
+            <Testimonials></Testimonials>
         </div>
     );
 };
