@@ -1,55 +1,112 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { BsCart3 } from "react-icons/bs";
-import { FaCalendar, FaHome, FaList } from "react-icons/fa";
+import { FaAllergies, FaBook, FaBookmark, FaCalendar, FaHome, FaList, FaPeopleArrows, FaPeopleCarry, FaUser, FaUsers, FaUtensils, FaVoicemail } from "react-icons/fa";
 import { MdOutlinePreview } from "react-icons/md";
 import { CiMenuBurger } from "react-icons/ci";
 import { AiOutlineUnorderedList } from "react-icons/ai";
+import { RiContractLine } from "react-icons/ri";
+import useAdmin from '../hooks/useAdmin';
 const DashBoard = () => {
+
+    //TODOL get isAdmin value from the database
+    // const isAdmin = true;
+    const [isAdmin] = useAdmin();
     return (
         <div className='flex'>
             {/* Dashboard sidebar  */}
-           
+
             <div className="w-64 min-h-screen bg-orange-200">
                 <h1 className='text-4xl text-center font-mono'>Dashboard</h1>
                 <ul className='menu p-4'>
+                    {
+                        isAdmin ?
+                            <>
+                                <li>
 
-                    <li>
+                                    <NavLink to='/dashboard/adminHome'>
+                                        <FaHome />
+                                        Admin Home
+                                    </NavLink>
+                                </li>
+                                <li>
 
-                        <NavLink to='/dashboard/userHome'>
-                            <FaHome />
-                            User Home
-                        </NavLink>
-                    </li>
-                    <li>
+                                    <NavLink to='/dashboard/additem'>
+                                        <FaUtensils />
+                                        Add items
+                                    </NavLink>
+                                </li>
+                                <li>
 
-                        <NavLink to='/dashboard/reservation'>
-                            <FaCalendar />
-                            Reservation
-                        </NavLink>
-                    </li>
-                    <li>
+                                    <NavLink to='/dashboard/manageItems'>
+                                        <FaList />
 
-                        <NavLink to='/dashboard/review'>
-                            <MdOutlinePreview />
+                                        Manage items
+                                    </NavLink>
+                                </li>
+                                
+                                <li>
 
-                            Add Review
-                        </NavLink>
-                    </li>
-                    <li>
+                                    <NavLink to='/dashboard/bookings'>
+                                        <FaBook />
+                                        Manage Bookings
+                                    </NavLink>
+                                </li>
+                                <li>
 
-                        <NavLink to='/dashboard/cart'>
-                            <BsCart3 />
-                            My cart
-                        </NavLink>
-                    </li>
-                    <li>
+                                    <NavLink to='/dashboard/users'>
+                                        <FaUsers />
+                                       All users
+                                    </NavLink>
+                                </li>
+                            </>
+                            : <>
+                                <li>
 
-                        <NavLink to='/dashboard/bookings'>
-                            <FaList />
-                            My bookings
-                        </NavLink>
-                    </li>
+                                    <NavLink to='/dashboard/userHome'>
+                                        <FaHome />
+                                        User Home
+                                    </NavLink>
+                                </li>
+                                <li>
+
+                                    <NavLink to='/dashboard/reservation'>
+                                        <FaCalendar />
+                                        Reservation
+                                    </NavLink>
+                                </li>
+                                <li>
+
+                                    <NavLink to='/dashboard/review'>
+                                        <MdOutlinePreview />
+
+                                        Add Review
+                                    </NavLink>
+                                </li>
+                                <li>
+
+                                    <NavLink to='/dashboard/cart'>
+                                        <BsCart3 />
+                                        My cart
+                                    </NavLink>
+                                </li>
+                                <li>
+
+                                    <NavLink to='/dashboard/bookings'>
+                                        <FaList />
+                                        My bookings
+                                    </NavLink>
+                                </li>
+                                <li>
+
+                                    <NavLink to='/dashboard/contract'>
+                                        <RiContractLine />
+                                        Contract
+                                    </NavLink>
+                                </li>
+                            </>
+                    }
+
                 </ul>
                 <div className="divider">OR</div>
                 <ul className='menu p-4'>
@@ -63,14 +120,14 @@ const DashBoard = () => {
                     <li>
 
                         <NavLink to='/menu'>
-                        <CiMenuBurger />
+                            <CiMenuBurger />
                             Menu
                         </NavLink>
                     </li>
                     <li>
 
                         <NavLink to='/order/salad'>
-                        <AiOutlineUnorderedList />
+                            <AiOutlineUnorderedList />
                             Order now
                         </NavLink>
                     </li>

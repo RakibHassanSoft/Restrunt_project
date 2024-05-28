@@ -4,6 +4,7 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2'
+import SocailLogin from '../../components/SocialLogin/SocailLogin';
 
 const Login = () => {
     const {singIn} = useContext(AuthContext)
@@ -112,6 +113,9 @@ const Login = () => {
                         </div>
                     </form>
                     <p className='mb-10 ml-10'><small >New here ? <Link to='/signup' className='text-red-400'>Create a new account</Link></small></p>
+                    <div className="divider">OR</div>
+
+<SocailLogin></SocailLogin>
                 </div>
             </div>
         </div>

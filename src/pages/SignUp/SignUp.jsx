@@ -4,10 +4,13 @@ import { useForm } from "react-hook-form"
 import { AuthContext } from '../../providers/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
-
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import { FcGoogle } from "react-icons/fc";
+import SocailLogin from '../../components/SocialLogin/SocailLogin';
 const SignUp = () => {
-    const { createUser,updateUser } = useContext(AuthContext)
-    const navigate =useNavigate()
+    const axiosPublic = useAxiosPublic()
+    const { createUser, updateUser } = useContext(AuthContext)
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
@@ -16,58 +19,70 @@ const SignUp = () => {
     } = useForm()
 
     const onSubmit = (data) => {
-        console.log(data)
+        // console.log(data)
         createUser(data.email, data.password)
-        .then(async(result) =>{
-            console.log(result.user)
-           updateUser(data.name,data.photoURL)
-           .then(async()=>{
-            await Swal.fire({
-                title: "Congratulation!",
-                // text: "Account Updated successfully!",
-                text: "Account Created successfully!",
-                icon: "success"
-              })
-              reset()
-              navigate('/')
+            .then(async (result) => {
+                // console.log(result.user)
+                updateUser(data.name, data.photoURL)
+                    .then(async () => {
+                        //create user entry in the database
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email,
 
-           })
-           .catch(async(err)=>{
-            console.log(err)
-            await Swal.fire({
-                title: "Failed",
-                text: "Failed to Update account",
-                icon: "error"
-               
-              });
-              reset()
-              navigate('/login')
-           })
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(async (res) => {
+                                // console.log("User added to the database")
+                                if (res.data.insertedId) {
+                                    await Swal.fire({
+                                        title: "Congratulation!",
+                                        text: "Account Created successfully!",
+                                        icon: "success"
+                                    })
+                                    reset()
+                                    navigate('/')
+                                }
+                            })
 
 
-           // User Created sucessfully
-        //    await Swal.fire({
-        //     title: "Congratulation!",
-        //     // text: "Account Updated successfully!",
-        //     text: "Account Created successfully!",
-        //     icon: "success"
-        //   })
-        //   reset()
-        //   navigate('/')
+                    })
+                    .catch(async (err) => {
+                        console.log(err)
+                        await Swal.fire({
+                            title: "Failed",
+                            text: "Failed to Update account",
+                            icon: "error"
+
+                        });
+                        reset()
+                        navigate('/login')
+                    })
 
 
-       })
-       .catch(async(err)=>{
-        await Swal.fire({
-            title: "Failed",
-            text: "Failed to create account",
-            icon: "error"
-           
-          });
-          reset()
-          navigate('/login')
-    })
- reset()
+                // User Created sucessfully
+                //    await Swal.fire({
+                //     title: "Congratulation!",
+                //     // text: "Account Updated successfully!",
+                //     text: "Account Created successfully!",
+                //     icon: "success"
+                //   })
+                //   reset()
+                //   navigate('/')
+
+
+            })
+            .catch(async (err) => {
+                await Swal.fire({
+                    title: "Failed",
+                    text: "Failed to create account",
+                    icon: "error"
+
+                });
+                reset()
+                navigate('/login')
+            })
+        reset()
     }
     // console.log(watch("example"))
 
@@ -152,9 +167,13 @@ const SignUp = () => {
 
                             </div>
                         </form>
-                    
+
                         <p className='mb-10 ml-10'><small >New here ? <Link to='/login' className='text-red-400'>Already have a new account</Link></small></p>
+                        <div className="divider">OR</div>
+
+                        <SocailLogin></SocailLogin>
                     </div>
+
                 </div>
             </div>
         </>
