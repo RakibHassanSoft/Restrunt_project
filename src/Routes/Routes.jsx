@@ -13,7 +13,10 @@ import PrivetRoute from "./PrivetRoute/PrivetRoute";
 import DashBoard from "../Layout/DashBoard";
 import Cart from "../pages/DashBoard/Cart/Cart";
 import AllUsers from "../pages/DashBoard/Admin/AllUsers/AllUsers";
- 
+import AddItem from "../pages/DashBoard/Admin/AddItem/AddItem";
+ import AdminRoute from '../Routes/AdminRoute'
+import ManageItem from "../pages/DashBoard/Admin/ManageItem/ManageItem";
+import UpdateItem from "../pages/DashBoard/Admin/UpdateItem/UpdateItem";
   
  export const router = createBrowserRouter([
     {
@@ -60,6 +63,19 @@ import AllUsers from "../pages/DashBoard/Admin/AllUsers/AllUsers";
         {
           path:'users',
           element:<AllUsers></AllUsers>
+        },
+        {
+          path:'addItem',
+          element:<AdminRoute><AddItem></AddItem></AdminRoute>
+        },
+        {
+          path:'manageItems',
+          element:<AdminRoute><ManageItem></ManageItem></AdminRoute>
+        },
+        {
+          path:'updateItem/:id',
+          element:<AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
+          loader:({params})=> fetch(`http://localhost:5000/menu/${params.id}`)
         }
       ]
     }

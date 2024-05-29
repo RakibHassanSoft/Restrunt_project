@@ -8,6 +8,7 @@ const Navbar = () => {
   //  console.log(user)
   const navigate = useNavigate()
   const [cart] = useCart()
+  // console.log(cart)
   const handleLogOut = () => {
     signOutUser()
       .then(() => {
