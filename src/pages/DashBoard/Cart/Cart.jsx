@@ -25,6 +25,7 @@ const Cart = () => {
                
                 asiosSecure.delete(`/carts/${id}`)
                 .then(async(res) =>{
+                    console.log(res.data)
                     if(res.data.deletedCount > 0){
                         
                         await refetch()

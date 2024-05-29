@@ -35,7 +35,7 @@ const useAxiosSecure = () => {
                 text: "Something went wrong!",
             });
             await signOutUser()
-            await localStorage.removeItem('access-token')
+            localStorage.removeItem('access-token')
             naviagete("/login")
         }
         console.log('status err in the interceptor', err)
