@@ -15,7 +15,7 @@ const useAxiosSecure = () => {
     exiosSecure.interceptors.request.use(function (config) {
         const token = localStorage.getItem('access-token')
         config.headers.authorization = `Bearer ${token}`
-        console.log('Request stoped by interceptors', token)
+        // console.log('Request stoped by interceptors', token)
         return config;
     }, function (err) {
         return Promise.reject(err)

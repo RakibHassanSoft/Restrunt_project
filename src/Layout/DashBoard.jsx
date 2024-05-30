@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { BsCart3 } from "react-icons/bs";
-import { FaAllergies, FaBook, FaBookmark, FaCalendar, FaHome, FaList, FaPeopleArrows, FaPeopleCarry, FaUser, FaUsers, FaUtensils, FaVoicemail } from "react-icons/fa";
+import { FaAllergies, FaBook, FaBookmark, FaCalendar, FaDollarSign, FaHome, FaList, FaPeopleArrows, FaPeopleCarry, FaUser, FaUsers, FaUtensils, FaVoicemail } from "react-icons/fa";
 import { MdOutlinePreview } from "react-icons/md";
 import { CiMenuBurger } from "react-icons/ci";
 import { AiOutlineUnorderedList } from "react-icons/ai";
@@ -73,6 +73,13 @@ const DashBoard = () => {
                                     <NavLink to='/dashboard/reservation'>
                                         <FaCalendar />
                                         Reservation
+                                    </NavLink>
+                                </li>
+                                <li>
+
+                                    <NavLink to='/dashboard/paymentHistory'>
+                                        <FaDollarSign />
+                                        Payment history
                                     </NavLink>
                                 </li>
                                 <li>
