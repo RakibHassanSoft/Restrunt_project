@@ -3,8 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
 import { BsCart3 } from "react-icons/bs";
 import useCart from '../../../hooks/useCart';
+import useAdmin from '../../../hooks/useAdmin'
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext)
+  const [isAdmin] = useAdmin()
   //  console.log(user)
   const navigate = useNavigate()
   const [cart] = useCart()
@@ -22,6 +24,17 @@ const Navbar = () => {
       <li><Link to='/menu'> Our menu</Link></li>
       <li><Link to='/order/salad'> Order</Link></li>
       <li><Link to='/secret'> Secret</Link></li>
+     {
+      // user?'True':"False"
+      //user ? condition? 'double true':"One true" :'false'
+     }
+     {
+      user && isAdmin && <li><Link to='/dashboard/adminHome'> Dashboard</Link></li>
+     }
+     {
+      user && !isAdmin && <li><Link to='/dashboard/userHome'> Dashboard</Link></li>
+     }
+      
 
 
 

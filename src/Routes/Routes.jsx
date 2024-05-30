@@ -14,12 +14,14 @@ import DashBoard from "../Layout/DashBoard";
 import Cart from "../pages/DashBoard/Cart/Cart";
 import AllUsers from "../pages/DashBoard/Admin/AllUsers/AllUsers";
 import AddItem from "../pages/DashBoard/Admin/AddItem/AddItem";
- import AdminRoute from '../Routes/AdminRoute'
+import UserHome from "../pages/DashBoard/User/UserHome/UserHome";
+import AdminRoute from '../Routes/AdminRoute'
 import ManageItem from "../pages/DashBoard/Admin/ManageItem/ManageItem";
 import UpdateItem from "../pages/DashBoard/Admin/UpdateItem/UpdateItem";
 import Payment from "../pages/DashBoard/Payment/Payment";
 import PaymnetHistry from "../pages/DashBoard/PaymnetHistry/PaymnetHistry";
-  
+import AdminHome from "../pages/DashBoard/Admin/AdminHome/AdminHome";
+
  export const router = createBrowserRouter([
     {
       path: "/",
@@ -66,11 +68,21 @@ import PaymnetHistry from "../pages/DashBoard/PaymnetHistry/PaymnetHistry";
           path:'paymentHistory',
           element:<PaymnetHistry></PaymnetHistry>
 
+        },{
+
+          path:'userHome',
+          element:<UserHome></UserHome>
         },
 
 
 
         //admin routes
+        {
+          path:'adminHome',
+          element:<AdminRoute><AdminHome></AdminHome></AdminRoute>
+        },
+        
+
         {
           path:'users',
           element:<AllUsers></AllUsers>

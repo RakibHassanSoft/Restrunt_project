@@ -53,12 +53,14 @@ const AuthProvider = ({children}) => {
                        if(res.data.token){
                         localStorage.setItem('access-token',res.data.token);
                        }
+                       setLoading(false);
                     })
             }else{
                 //TODO: remove token (if token store in client side local store,caching,in memory)
                 localStorage.removeItem('accenss-token')
+                setLoading(false);
             }
-            setLoading(false);
+          
         });
         return ()=>{
             setUser(null)
